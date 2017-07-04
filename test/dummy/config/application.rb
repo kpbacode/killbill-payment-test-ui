@@ -5,6 +5,12 @@ require 'rails/all'
 Bundler.require(*Rails.groups)
 require "payment_test"
 
+require "jquery-rails"
+require "twitter-bootstrap-rails"
+require "d3_rails"
+
+require "js-routes"
+
 module Dummy
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.

@@ -1,7 +1,7 @@
 require 'payment_test/client'
 
 module PaymentTest
-  class PaymentTestController < EngineController
+  class PaymentsController < EngineController
 
     def index
       puts "+++++ INDEX !!!!!"

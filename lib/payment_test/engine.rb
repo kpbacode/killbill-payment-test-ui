@@ -16,8 +16,9 @@ module PaymentTest
   class Engine < ::Rails::Engine
     isolate_namespace PaymentTest
 
-    ActiveSupport::Inflector.inflections do |inflect|
-      inflect.acronym 'PaymentTest'
-    end
+
+    #ActiveSupport::Inflector.inflections do |inflect|
+    #  inflect.acronym 'PaymentTest'
+    #end
   end
 end
