@@ -7,8 +7,7 @@ module PaymentTest
       begin
         raw_status = ::Killbill::PaymentTest::PaymentTestClient.status(options_for_klient)
       rescue => e
-        # No connectivity, GitHub down, ...
-        Rails.logger.warn("Unable to get latest plugins, trying built-in directory: #{e.inspect}")
+        Rails.logger.warn("Failed to retrieve payment status : #{e}")
         @status = "UNKNOWN"
       end
 
@@ -28,15 +27,36 @@ module PaymentTest
         @status = "CLEAR"
       end
 
-      @methods = raw_status.key?("methods") ? raw_status["methods"] : ['*']
+      if !raw_status.key?("methods") || raw_status["methods"].empty?
+        @methods = ['*']
+      else
+        @methods = raw_status["methods"]
+      end
     end
 
     def set_failed_state
-      #TODO
+
+      new_state = params.require(:state)
+      target_method = "set_status_#{new_state.to_s.downcase}".to_sym
+
+      begin
+        ::Killbill::PaymentTest::PaymentTestClient.send(target_method, nil, options_for_klient)
+      rescue => e
+        flash[:error] = "Failed to reset state: #{e}"
+      end
+
+
+      redirect_to root_path and return
     end
 
     def reset
-      #TODO
+
+      begin
+        ::Killbill::PaymentTest::PaymentTestClient.reset(nil, options_for_klient)
+      rescue => e
+        flash[:error] = "Failed to reset state: #{e}"
+      end
+      redirect_to root_path and return
     end
 
   end

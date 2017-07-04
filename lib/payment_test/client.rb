@@ -12,9 +12,6 @@ module Killbill
           response = KillBillClient::API.get "#{KILLBILL_PAYMENT_TEST_PREFIX}/status",
                                              {},
                                              options
-
-          puts "++++ response status is #{response}"
-
           JSON.parse(response.body)
         end
 
@@ -35,11 +32,11 @@ module Killbill
           configure("ACTION_SLEEP", sleep_time_sec, methods, options)
         end
 
-        def set_throw_exception(methods, options = {})
+        def set_status_throw(methods, options = {})
           configure("ACTION_THROW_EXCEPTION", nil, methods, options)
         end
 
-        def set_return_nil(methods, options = {})
+        def set_status_null(methods, options = {})
           configure("ACTION_RETURN_NIL", nil, methods, options)
         end
 
@@ -52,18 +49,14 @@ module Killbill
         def configure(action, arg,  methods, options = {})
 
           body = {
-             :CONFIGURE_ACTION =>  action
+             "CONFIGURE_ACTION" =>  action
           }
 
           if action == "ACTION_RESET"
-            body[:SLEEP_TIME_SEC] = arg
+            body["SLEEP_TIME_SEC"] = arg
           end
 
-          if methods
-            body[:METHODS] = methods.join(",")
-          end
-
-          puts "+++++++++++ configure body = #{body}"
+          body["METHODS"] = methods.nil? ? "" : methods.join(",")
 
           KillBillClient::API.post "#{KILLBILL_PAYMENT_TEST_PREFIX}/configure",
                                    body.to_json,
