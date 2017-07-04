@@ -4,9 +4,26 @@
 
         <h1>Payment Test Status</h1>
 
-        Status is: <%= @status %>
+        <div id="payment-status-table-wrapper">
+            <table id="payment-status-table" class="table table-condensed table-striped mobile-data">
+                <thead>
+                <tr>
+                    <th>Method</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @methods.each do |m| %>
+                    <tr>
+                        <td><%= m %></td>
+
+
+                        <td ><span class="label label-<%= @status == 'CLEAR' ? 'success' : (@status.starts_with?('SLEEP') ? 'warning' : 'danger') %>"><%= @status %></span></td>
+                    </tr>
+                <% end %>
+                </tbody>
+            </table>
+        </div>
 
     </div>
-
-
 </div>

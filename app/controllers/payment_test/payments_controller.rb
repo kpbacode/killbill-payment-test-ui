@@ -4,8 +4,6 @@ module PaymentTest
   class PaymentsController < EngineController
 
     def index
-      puts "+++++ INDEX !!!!!"
-
       begin
         raw_status = ::Killbill::PaymentTest::PaymentTestClient.status(options_for_klient)
       rescue => e
@@ -14,28 +12,23 @@ module PaymentTest
         @status = "UNKNOWN"
       end
 
-      puts "+++++ raw_status = #{raw_status}"
-
       if raw_status.key? :always_return_plugin_status_error.to_s
-        @status = "Plugin configured to return errors"
+        @status = "RETURN ERROR"
       elsif raw_status.key? :always_return_plugin_status_pending.to_s
-        @status = "Plugin configured to return pending"
+        @status = "RETURN PENDING"
       elsif raw_status.key? :always_return_plugin_status_canceled.to_s
-        @status = "Plugin configured to return canceled"
+        @status = "RETURN CANCELED"
       elsif raw_status.key? :always_throw.to_s
-        @status = "Plugin configured to throw errors"
+        @status = "RETURN THROW"
       elsif raw_status.key? :always_return_nil.to_s
-        @status = "Plugin configured to return null"
+        @status = "RETURN NULL "
       elsif raw_status.key? :sleep_time_sec.to_s
-        @status = "Plugin configured to sleep #{sleep_time_sec}"
+        @status = "SLEEP #{sleep_time_sec}"
       else
-        @status = "Plugin is in RESET state"
+        @status = "CLEAR"
       end
 
-      if raw_status.key? :methods
-        @methods = raw_status[:methods]
-      end
-
+      @methods = raw_status.key?("methods") ? raw_status["methods"] : ['*']
     end
 
     def set_failed_state
