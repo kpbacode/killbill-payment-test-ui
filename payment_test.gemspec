@@ -6,7 +6,7 @@ require "payment_test/version"
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
 
-  s.name        = 'payment_test'
+  s.name        = 'killbill-payment-test'
   s.version     =  PaymentTest::VERSION
   s.authors     = 'Kill Bill core team'
   s.email       = 'killbilling-users@googlegroups.com'

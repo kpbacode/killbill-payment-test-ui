@@ -8,10 +8,11 @@ module PaymentTest
         raw_status = ::Killbill::PaymentTest::PaymentTestClient.status(options_for_klient)
       rescue => e
         Rails.logger.warn("Failed to retrieve payment status : #{e}")
-        @status = "UNKNOWN"
       end
 
-      if raw_status.key? :always_return_plugin_status_error.to_s
+      if raw_status.nil?
+        @status = "UNKNOWN"
+      elsif raw_status.key? :always_return_plugin_status_error.to_s
         @status = "RETURN ERROR"
       elsif raw_status.key? :always_return_plugin_status_pending.to_s
         @status = "RETURN PENDING"
@@ -27,7 +28,9 @@ module PaymentTest
         @status = "CLEAR"
       end
 
-      if !raw_status.key?("methods") || raw_status["methods"].empty?
+      if raw_status.nil?
+        @methods = ['*']
+      elsif !raw_status.key?("methods") || raw_status["methods"].empty?
         @methods = ['*']
       else
         @methods = raw_status["methods"]
@@ -42,7 +45,7 @@ module PaymentTest
       begin
         ::Killbill::PaymentTest::PaymentTestClient.send(target_method, nil, options_for_klient)
       rescue => e
-        flash[:error] = "Failed to reset state: #{e}"
+        flash[:error] = "Failed to set state: #{e}"
       end
 
 
