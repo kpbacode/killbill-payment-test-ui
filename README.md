@@ -10,7 +10,8 @@ Kill Bill compatibility
 
 | KPM UI version | Kill Bill version |
 | -------------: | ----------------: |
-| 0.0.y          | 0.18.z            |
+| 0.0.y          | 0.18.z (Rails 4)  |
+| 0.1.y          | 0.18.z (Rails 5)  |
 
 Testing
 -------
