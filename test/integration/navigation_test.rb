@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class NavigationTest < ActionDispatch::IntegrationTest
-
   include PaymentTest::Engine.routes.url_helpers
 
   test 'can see the payment test info page' do
@@ -9,4 +10,3 @@ class NavigationTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 end
-

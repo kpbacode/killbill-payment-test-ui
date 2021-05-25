@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 # Declare your gem's dependencies in payment_test.gemspec.
@@ -10,5 +12,5 @@ gemspec
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
 
-#gem 'killbill-client', :github => 'killbill/killbill-client-ruby', :ref => 'work-for-release-0.19.x'
-#gem 'killbill-client', '3.2.0'
+# gem 'killbill-client', :github => 'killbill/killbill-client-ruby', :ref => 'work-for-release-0.19.x'
+# gem 'killbill-client', '3.2.0'

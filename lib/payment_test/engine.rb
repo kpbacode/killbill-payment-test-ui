@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Dependencies
 #
 # Sigh. Rails autoloads the gems specified in the Gemfile and nothing else.
@@ -11,7 +13,6 @@ require 'killbill_client'
 
 module PaymentTest
   class Engine < ::Rails::Engine
-
     isolate_namespace PaymentTest
   end
 end
