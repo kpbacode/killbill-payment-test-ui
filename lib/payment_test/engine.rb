@@ -8,7 +8,6 @@
 # See also https://github.com/carlhuda/bundler/issues/49
 require 'jquery-rails'
 require 'font-awesome-rails'
-require 'twitter-bootstrap-rails'
 require 'killbill_client'
 
 module PaymentTest
