@@ -12,5 +12,4 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
 //= require payment_test/payment_test
