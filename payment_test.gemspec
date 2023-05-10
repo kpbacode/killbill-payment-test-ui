@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir['test/**/*']
 
   s.add_dependency 'jquery-rails'
-  s.add_dependency 'rails', '~> 7.0'
+  s.add_dependency 'rails', '~> 6.1.7'
   s.add_dependency 'sass-rails'
   # See https://github.com/seyhunak/twitter-bootstrap-rails/issues/897
   s.add_dependency 'font-awesome-rails'
